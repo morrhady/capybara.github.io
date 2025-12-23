@@ -36,9 +36,9 @@ This project is automatically deployed to GitHub Pages using GitHub Actions. The
 To enable GitHub Pages for this repository:
 1. Go to repository Settings → Pages
 2. Under "Source", select "GitHub Actions"
-3. The site will be available at `https://morrhady.github.io/`
+3. The site will be available at `https://morrhady.github.io/capybara.github.io/`
 
-Note: Since this repository is named `capybara.github.io`, it's a user/organization site and will be served from the root domain.
+Note: This is a GitHub Pages project site and is served at `/capybara.github.io/`.
 
 ## Notes
 
