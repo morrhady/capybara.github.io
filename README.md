@@ -26,6 +26,20 @@ npm run dev
 - [src/App.tsx](src/App.tsx): Main UI (timer, mood, tasks, boxing bag, contacts).
 - [src/App.css](src/App.css) & [src/index.css](src/index.css): Styling for the calming, mascot-friendly layout.
 
+## Deployment
+
+This project is automatically deployed to GitHub Pages using GitHub Actions. The workflow:
+1. Runs on every push to the `main` branch
+2. Installs dependencies and builds the project
+3. Deploys the built files from the `dist` folder to GitHub Pages
+
+To enable GitHub Pages for this repository:
+1. Go to repository Settings → Pages
+2. Under "Source", select "GitHub Actions"
+3. The site will be available at `https://morrhady.github.io/`
+
+Note: Since this repository is named `capybara.github.io`, it's a user/organization site and will be served from the root domain.
+
 ## Notes
 
 - Guidance for AI helpers lives in [.github/copilot-instructions.md](.github/copilot-instructions.md) 
