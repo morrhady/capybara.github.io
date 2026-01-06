@@ -3,12 +3,6 @@ import './App.css'
 
 type Phase = 'focus' | 'break'
 
-type MoodLog = {
-  timestamp: number
-  phase: 'pre' | 'post'
-  mood: string
-}
-
 type Task = {
   id: string
   title: string
@@ -16,15 +10,6 @@ type Task = {
   priority: 'low' | 'medium' | 'high'
   done: boolean
 }
-
-const moodOptions = [
-  { value: 'calm', label: 'Calm' },
-  { value: 'focused', label: 'Focused' },
-  { value: 'stressed', label: 'Stressed' },
-  { value: 'tired', label: 'Tired' },
-  { value: 'proud', label: 'Proud' },
-  { value: 'overwhelmed', label: 'Overwhelmed' },
-]
 
 const quoteBank = [
   'Progress, not perfection.',
@@ -69,10 +54,6 @@ function App() {
   const [tapCount, setTapCount] = useState(0)
   const [unlockedQuote, setUnlockedQuote] = useState(quoteBank[0])
   const [isSwinging, setIsSwinging] = useState(false)
-
-  const [preMood, setPreMood] = useState('calm')
-  const [postMood, setPostMood] = useState('proud')
-  const [moodLog, setMoodLog] = useState<MoodLog[]>([])
 
   const [tasks, setTasks] = useState<Task[]>([
     {
@@ -153,13 +134,6 @@ function App() {
     setTapCount(nextTap)
   }
 
-  const logMood = (phaseLogged: 'pre' | 'post', mood: string) => {
-    setMoodLog((entries) => [
-      { timestamp: Date.now(), phase: phaseLogged, mood },
-      ...entries,
-    ])
-  }
-
   const toggleTask = (id: string) => {
     setTasks((existing) =>
       existing.map((task) =>
@@ -188,7 +162,6 @@ function App() {
   }
 
   const currentContact = contacts[contactIndex]
-  const moodHistory = moodLog.slice(0, 5)
   const progress = Math.min(10, tapCount)
 
   return (
@@ -198,8 +171,8 @@ function App() {
           <p className="eyebrow">Capybara Companion</p>
           <h1>Stay calm, focused, and kind to yourself.</h1>
           <p className="lede">
-            Pomodoro + mood check-ins + playful boxing bag quotes. Non-clinical,
-            friendly, and here to keep you steady.
+            Pomodoro timer + playful boxing bag quotes + task organizer. Non-clinical,
+            friendly, and here to keep you steady and focused.
           </p>
         </div>
         <div className="hero-stats">
@@ -265,67 +238,6 @@ function App() {
                 onChange={(event) => setBreakMinutes(Number(event.target.value))}
               />
             </label>
-          </div>
-        </section>
-
-        <section className="panel mood">
-          <div className="panel-header">
-            <h2>Mood check-ins</h2>
-            <p className="hint">Quick feelings survey before/after sessions.</p>
-          </div>
-          <div className="mood-grid">
-            <div>
-              <p className="label">Before focus</p>
-              <div className="option-row">
-                {moodOptions.map((option) => (
-                  <button
-                    key={option.value}
-                    className={`option ${preMood === option.value ? 'option-active' : ''}`}
-                    onClick={() => {
-                      setPreMood(option.value)
-                      logMood('pre', option.value)
-                    }}
-                  >
-                    {option.label}
-                  </button>
-                ))}
-              </div>
-            </div>
-            <div>
-              <p className="label">After session</p>
-              <div className="option-row">
-                {moodOptions.map((option) => (
-                  <button
-                    key={option.value}
-                    className={`option ${postMood === option.value ? 'option-active' : ''}`}
-                    onClick={() => {
-                      setPostMood(option.value)
-                      logMood('post', option.value)
-                    }}
-                  >
-                    {option.label}
-                  </button>
-                ))}
-              </div>
-            </div>
-          </div>
-          <div className="history">
-            <p className="label">Recent mood signals</p>
-            <ul>
-              {moodHistory.length === 0 && <li className="hint">No check-ins yet.</li>}
-              {moodHistory.map((entry) => (
-                <li key={entry.timestamp}>
-                  <span className="pill subtle">{entry.phase === 'pre' ? 'Pre' : 'Post'}</span>
-                  <span>{entry.mood}</span>
-                  <span className="muted">
-                    {new Date(entry.timestamp).toLocaleTimeString([], {
-                      hour: '2-digit',
-                      minute: '2-digit',
-                    })}
-                  </span>
-                </li>
-              ))}
-            </ul>
           </div>
         </section>
 

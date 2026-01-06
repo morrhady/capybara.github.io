@@ -18,7 +18,7 @@ export type AdviceContext = {
   phase: 'focus' | 'break'
   focusMinutes: number
   breakMinutes: number
-  moodLog: MoodLog[]
+  moodLog?: MoodLog[]
   tasks: Task[]
 }
 
@@ -59,7 +59,7 @@ export function getAdvice(
 ): { intent: Intent; advice: string } {
   const fallback: Intent = context.phase === 'focus' ? 'focus' : 'break'
   const intent = detectIntent(userText, fallback)
-  const moods = moodSummary(context.moodLog)
+  const moods = moodSummary(context.moodLog || [])
   const topTask = pickTopTask(context.tasks)
   const fm = context.focusMinutes
   const bm = context.breakMinutes

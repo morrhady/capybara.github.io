@@ -1,12 +1,6 @@
 import { useMemo, useState } from 'react'
 import { getAdvice } from './advice/engine'
 
-type MoodLog = {
-  timestamp: number
-  phase: 'pre' | 'post'
-  mood: string
-}
-
 type Task = {
   id: string
   title: string
@@ -19,13 +13,11 @@ export function AdviceChat({
   phase,
   focusMinutes,
   breakMinutes,
-  moodLog,
   tasks,
 }: {
   phase: 'focus' | 'break'
   focusMinutes: number
   breakMinutes: number
-  moodLog: MoodLog[]
   tasks: Task[]
 }) {
   const [messages, setMessages] = useState<{ role: 'user' | 'assistant'; text: string }[]>([])
@@ -45,7 +37,6 @@ export function AdviceChat({
       phase,
       focusMinutes,
       breakMinutes,
-      moodLog,
       tasks,
     })
     setMessages((m) => [...m, { role: 'assistant', text: advice }])
