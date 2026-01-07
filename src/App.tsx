@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import './App.css'
 
 type Phase = 'focus' | 'break'
@@ -85,8 +85,15 @@ function App() {
   const focusDuration = useMemo(() => focusMinutes * 60, [focusMinutes])
   const breakDuration = useMemo(() => breakMinutes * 60, [breakMinutes])
 
+  const isInitialMount = useRef(true)
   useEffect(() => {
-    setSecondsLeft(phase === 'focus' ? focusDuration : breakDuration)
+    if (isInitialMount.current) {
+      isInitialMount.current = false
+      return
+    }
+    queueMicrotask(() => {
+      setSecondsLeft(phase === 'focus' ? focusDuration : breakDuration)
+    })
   }, [phase, focusDuration, breakDuration])
 
   useEffect(() => {
@@ -100,15 +107,16 @@ function App() {
   useEffect(() => {
     if (!isRunning || secondsLeft > 0) return
 
-    setPhase((previousPhase) => {
-      const nextPhase: Phase = previousPhase === 'focus' ? 'break' : 'focus'
-      if (previousPhase === 'focus') {
+    // Timer completed - switch phase asynchronously to avoid cascading renders
+    queueMicrotask(() => {
+      const nextPhase: Phase = phase === 'focus' ? 'break' : 'focus'
+      if (phase === 'focus') {
         setCompletedSessions((count) => count + 1)
       }
+      setPhase(nextPhase)
       setSecondsLeft(nextPhase === 'focus' ? focusDuration : breakDuration)
-      return nextPhase
     })
-  }, [secondsLeft, isRunning, focusDuration, breakDuration])
+  }, [secondsLeft, isRunning, phase, focusDuration, breakDuration])
 
   const handleStartPause = () => {
     setIsRunning((running) => !running)
