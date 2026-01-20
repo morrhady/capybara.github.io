@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import './App.css'
+import Login from './Login'
 
 type Phase = 'focus' | 'break'
 
@@ -44,6 +45,7 @@ const randomQuote = (previous: string) => {
 }
 
 function App() {
+  const [userName, setUserName] = useState<string | null>(null)
   const [phase, setPhase] = useState<Phase>('focus')
   const [focusMinutes, setFocusMinutes] = useState(25)
   const [breakMinutes, setBreakMinutes] = useState(5)
@@ -172,12 +174,20 @@ function App() {
   const currentContact = contacts[contactIndex]
   const progress = Math.min(10, tapCount)
 
+  const handleLogin = (name: string) => {
+    setUserName(name)
+  }
+
+  if (!userName) {
+    return <Login onLogin={handleLogin} />
+  }
+
   return (
     <div className="app-shell">
       <header className="hero">
         <div>
           <p className="eyebrow">Capybara Companion</p>
-          <h1>Stay calm, focused, and kind to yourself.</h1>
+          <h1>Hello {userName}! Stay calm, focused, and kind to yourself.</h1>
           <p className="lede">
             Pomodoro timer + playful boxing bag quotes + task organizer. Non-clinical,
             friendly, and here to keep you steady and focused.
