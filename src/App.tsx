@@ -202,7 +202,13 @@ function App() {
       <main className="grid">
         <section className="panel timer">
           <div className="panel-header">
-            <h2>Pomodoro</h2>
+            <h2>
+              <svg className="panel-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"/>
+                <polyline points="12 6 12 12 16 14"/>
+              </svg>
+              Pomodoro
+            </h2>
             <div className="chip-row">
               <button
                 className={`chip ${phase === 'focus' ? 'chip-active' : ''}`}
@@ -261,7 +267,13 @@ function App() {
 
         <section className="panel tasks">
           <div className="panel-header">
-            <h2>Task organizer</h2>
+            <h2>
+              <svg className="panel-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M9 11l3 3L22 4"/>
+                <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+              </svg>
+              Task organizer
+            </h2>
             <p className="hint">Prioritisation of your tasks to reduce stress</p>
           </div>
           <div className="task-form">
@@ -308,7 +320,14 @@ function App() {
 
         <section className="panel boxing">
           <div className="panel-header">
-            <h2>Boxing bag</h2>
+            <h2>
+              <svg className="panel-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"/>
+                <circle cx="12" cy="12" r="6"/>
+                <circle cx="12" cy="12" r="2"/>
+              </svg>
+              Boxing bag
+            </h2>
             <p className="hint">Tap 10x to unlock a random motivational quote.</p>
           </div>
           <div className="boxing-body">
@@ -341,7 +360,12 @@ function App() {
 
         <section className="panel contacts">
           <div className="panel-header">
-            <h2>Emergency contact rotation</h2>
+            <h2>
+              <svg className="panel-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+              </svg>
+              Emergency contact rotation
+            </h2>
             <p className="hint">Keeps a warm connection available if you need it.</p>
           </div>
           <div className="contact-card">

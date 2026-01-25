@@ -129,6 +129,14 @@
 .panel h2 {
   margin: 0;
   font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.panel-icon {
+  flex-shrink: 0;
+  color: #667eea;
 }
 
 .chip-row {
